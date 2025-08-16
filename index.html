@@ -9,9 +9,11 @@
 <body>
     <div id="app">
         <p>{{message}}</p>
+        <p>{{discriptions}}</p>
     </div>
     <div id="normal">
         <p>{{message}}</p>
+        <p>{{discriptions}}</p>
     </div>
     <script>
         const {createApp} = Vue;
@@ -19,6 +21,7 @@
         createApp({
             data(){
                 return{
+                    discriptions : 'Hello i am Vue 2!',
                     message : "Hello Vue!"
                 }
             }
@@ -26,6 +29,7 @@
         createApp({
             data() {
                 return {
+                    discriptions : 'Hello i am Vue 2!',
                     message : 'Hello Vue 2!'
                 }
             }
