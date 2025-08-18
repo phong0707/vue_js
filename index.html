@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue JS</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-</head>
-<body>
+  </head>
+
+  <body>
     <div id="app">
-        <p>{{message}}</p>
-        <p>{{discriptions}}</p>
+        <button type="button" @click="addNewItem">Add Country</button>
+
+      <input type="text" v-model="newItem">  
+      <p>Loop</p>
+      <p v-for="(item, index) in countries">{{item}} <button type="button" @click="deleteItem(index)">Delete</button></p>
     </div>
-    <div id="normal">
-        <p>{{message}}</p>
-        <p>{{discriptions}}</p>
-    </div>
+
     <script>
-        const {createApp} = Vue;
-        // Vue Instand
-        createApp({
-            data(){
-                return{
-                    discriptions : 'Hello i am Vue 2!',
-                    message : "Hello Vue!"
-                }
-            }
-        }).mount('#app')
-        createApp({
-            data() {
-                return {
-                    discriptions : 'Hello i am Vue 2!',
-                    message : 'Hello Vue 2!'
-                }
-            }
-        }).mount('#normal')
-        
+      const { createApp } = Vue;
+      // Vue Instand
+      createApp({
+        data() {
+          return {
+            messages: ["Hello Vue!"],
+            newItem: '',
+            countries: ["USA", "Canada", "Mexico"],
+          };
+        },
+        methods: {
+          addMessage() {
+            this.messages.push("Hello Vue!");
+          },
+          addNewItem(){
+            this.countries.push(this.newItem);
+            this.newItem = '';
+          },
+          deleteItem(index){
+            this.countries.splice(index,1);
+          }
+        },
+      }).mount("#app");
     </script>
-</body>
+  </body>
 </html>
