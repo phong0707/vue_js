@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-</head>
-<body>
+    <style>
+      button {
+        margin: 10px 0 10px 10px;
+      }
+    </style>
+  </head>
+  <body>
     <div id="app">
-        <h2>Please innput tasks</h2>
-        <input type="text">
-        <p v-for="(item , index) in todos" :key="index">{{ index + 1 }} - {{item.text}}</p>
+      <h2>Please innput tasks</h2>
+      <input
+        type="text"
+        v-model="task"
+        @keyup.enter="addTask"
+        placeholder="Type and press Enter"
+      />
+      <button @click="addTask">Add Task</button>
+      <p v-if="todos.length == 0">No tasks available</p>
+      <p v-if="todos.length > 0">There is some task</p>
+      <div v-for="(item, index) in todos" :key="index">
+        <span v-if="item.completed"><s>{{ index + 1 }} - {{ item }}</s></span>
+        <span v-else>{{ index + 1 }} - {{ item }}</span>
+        <button
+          class="button"
+          v-if="!item.completed"
+          @click="DeleteItem(index)"
+        >
+          Delete
+        </button>
+        <button class="button" @click="completedItem(index)">Complete</button>
+      </div>
+      <h1 v-if="completed.length > 0">Completed Tasks</h1>
+      <div v-for="(item, index) in completed" :key="index">
+        <span><s>{{ index + 1 }} - {{ item }}</s></span>
+        <button @click="DeleteCompleted(index)">Delete</button>
+    </div>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>

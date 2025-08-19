@@ -3,23 +3,49 @@ createApp({
   data(){
     return{
         todos: [
-          { text: 'Go Home', },
-          { text: 'Go Shopping', },
-          { text: 'Go to Gym', },
-          { text: 'Go to School', },
-          { text: 'Go to Work', },
-          { text: 'Go to Park', },
-          { text: 'Go to Beach', },
-          { text: 'Go to Mall', },
-          { text: 'Go to Cinema', },
-          { text: 'Go to Library', },
-          { text: 'Go to Restaurant', },
-          { text: 'Go to Supermarket', },
-          { text: 'Go to Hospital', }
+          // "Go Home",
+          // "Go Shopping",
+          // "Go to Gym",
+          // "Go to School",
+          // "Go to Work",
+          // "Go to Park",
+          // "Go to Beach",
+          // "Go to Mall",
+          // "Go to Cinema",
+          // "Go to Library",
+          // "Go to Restaurant",
+          // "Go to Supermarket",
+          // "Go to Hospital"
         ],
+        task : "",
+        completed: []
+    }
+    
+  },
+  // Life CycleHook
+  mounted() {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key === "todos") {
+        this.todos = JSON.parse(localStorage.getItem("todos"));
+      }
     }
   },
   methods: {
-    
+    addTask(){
+      this.todos.push(this.task)
+      this.task = ""
+      localStorage.setItem('todos', JSON.stringify(this.todos));
+    },
+    DeleteItem(index){
+      this.todos.splice(index, 1)
+    },
+    completedItem(index){
+     this.completed.push(this.todos[index]),
+     this.DeleteItem(index)
+    },
+    DeleteCompleted(index){
+      this.completed.splice(index, 1)
+    }
   }
 }).mount('#app')
